@@ -59,6 +59,12 @@ func server(wg *sync.WaitGroup, port_index int) {
 			} else {
 				data_to_send_back = []byte("NOT_FOUND")
 			}
+		case "DEL":
+			if found := local_keys.Delete(key); found {
+				data_to_send_back = []byte("DELETED")
+			} else {
+				data_to_send_back = []byte("NOT_FOUND")
+			}
 		default:
 			common.Assert(false)
 		}
